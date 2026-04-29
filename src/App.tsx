@@ -146,8 +146,8 @@ export default function App() {
         </section>
 
         {/* Categories Bar - Sticky feeling */}
-        <div id="catalogo" className="bg-white border-y border-gray-100 py-4 px-4 overflow-x-auto no-scrollbar sticky top-[88px] z-40 backdrop-blur-md bg-white/90">
-          <div className="max-w-7xl mx-auto flex items-center justify-center gap-6 md:gap-10 min-w-max">
+        <div id="catalogo" className="bg-white border-y border-gray-100 py-4 px-6 overflow-x-auto no-scrollbar sticky top-[72px] md:top-[88px] z-40 backdrop-blur-md bg-white/95">
+          <div className="max-w-7xl mx-auto flex items-center justify-start md:justify-center gap-6 md:gap-10 min-w-max">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}

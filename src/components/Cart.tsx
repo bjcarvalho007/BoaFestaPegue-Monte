@@ -86,8 +86,8 @@ export default function Cart({ isOpen, onClose, items, onRemove, onUpdateQuantit
                 </div>
               ) : (
                 items.map((item) => (
-                  <div key={item.id} className="flex gap-4 group">
-                    <div className="w-24 h-24 bg-gray-50 rounded-2xl overflow-hidden flex-shrink-0 border border-gray-100">
+                  <div key={item.id} className="flex min-h-[100px] gap-4 group border-b border-gray-50 pb-6 last:border-0 last:pb-0">
+                    <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gray-50 rounded-2xl overflow-hidden flex-shrink-0 border border-gray-100">
                       <img
                         src={item.image}
                         alt={item.name}
