@@ -13,7 +13,8 @@ import FloatingWhatsApp from './components/FloatingWhatsApp';
 import ReviewForm from './components/ReviewForm';
 import { PRODUCTS, REVIEWS, CATEGORIES } from './data/mockData';
 import { Product, CartItem, Review } from './types';
-import { ArrowRight, Sparkles, Instagram } from 'lucide-react';
+import { ArrowRight, Sparkles, Instagram, Mail } from 'lucide-react';
+import { CONTACT_EMAIL } from './constants';
 
 export default function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -89,6 +90,16 @@ export default function App() {
               <p className="text-xl text-gray-500 mb-12 max-w-md leading-relaxed font-light">
                 Kits decorativos <span className="text-black font-semibold">Pegue & Monte</span>. A solução prática, econômica e elegante para transformar qualquer ambiente.
               </p>
+              
+              <motion.a
+                href="#como-funciona"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-3 bg-pink-500 text-white px-10 py-5 rounded-[2rem] text-sm font-black uppercase tracking-widest hover:bg-pink-600 transition-all shadow-2xl shadow-pink-200"
+              >
+                Como Funciona
+                <ArrowRight size={20} className="text-pink-100" />
+              </motion.a>
             </motion.div>
             
             <motion.div
@@ -212,15 +223,35 @@ export default function App() {
           <span className="text-2xl font-display font-black text-gray-900 tracking-tight uppercase">BOA FESTA</span>
           <div className="flex flex-col items-center">
             <p className="text-sm text-gray-400">© 2024 Boa Festa - Pegue & Monte. Todos os direitos reservados.</p>
-            <p className="text-sm text-pink-500 font-medium mt-1">miriankelly.8@gmail.com</p>
             <p className="text-xs text-black font-bold mt-2 uppercase tracking-widest">Desenvolvido por B.J.C</p>
           </div>
-          <div className="flex gap-8 items-center">
-            <a href="https://www.instagram.com/boa_festapegueemonte?igsh=aGE2bDZuMmNhbHJi" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition-colors">
-              <Instagram size={20} />
+          <div className="flex flex-wrap justify-center md:justify-end gap-4 items-center">
+            <a 
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="group flex items-center gap-3 bg-gray-50 hover:bg-pink-50 text-gray-600 hover:text-pink-600 px-5 py-3 rounded-2xl transition-all duration-300 border border-gray-100"
+              title="Enviar E-mail"
+            >
+              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                <Mail size={16} />
+              </div>
+              <span className="text-xs font-bold uppercase tracking-widest hidden sm:inline">E-mail</span>
             </a>
-            <a href="#como-funciona" className="text-sm font-medium hover:text-pink-500 transition-colors">Como Funciona</a>
-            <a href="#catalogo" className="text-sm font-medium hover:text-pink-500 transition-colors">Reservas</a>
+            
+            <a 
+              href="https://www.instagram.com/boa_festapegueemonte?igsh=aGE2bDZuMmNhbHJi" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="group flex items-center gap-3 bg-gray-50 hover:bg-pink-50 text-gray-600 hover:text-pink-600 px-5 py-3 rounded-2xl transition-all duration-300 border border-gray-100"
+              title="Instagram"
+            >
+              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                <Instagram size={16} />
+              </div>
+              <span className="text-xs font-bold uppercase tracking-widest hidden sm:inline">Instagram</span>
+            </a>
+
+            <div className="h-8 w-px bg-gray-100 mx-2 hidden md:block" />
+            {/* Rodapé limpo sem links redundantes */}
           </div>
         </div>
       </footer>

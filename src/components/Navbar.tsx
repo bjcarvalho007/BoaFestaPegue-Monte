@@ -4,8 +4,9 @@
  */
 
 import { useState } from 'react';
-import { ShoppingCart, Search, Menu, Phone, Instagram, X } from 'lucide-react';
+import { ShoppingCart, Search, Menu, Phone, Instagram, X, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { CONTACT_EMAIL } from '../constants';
 
 interface NavbarProps {
   cartCount: number;
@@ -53,8 +54,11 @@ export default function Navbar({ cartCount, onCartClick, onSearch }: NavbarProps
           </div>
 
           <div className="flex items-center gap-2 md:gap-4">
-            <a href="https://www.instagram.com/boa_festapegueemonte?igsh=aGE2bDZuMmNhbHJi" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-gray-50 text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-full transition-all hidden sm:block">
-              <Instagram size={20} />
+            <a 
+              href="#como-funciona" 
+              className="hidden md:flex items-center gap-2 bg-pink-500 text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-pink-600 transition-all shadow-lg shadow-pink-200"
+            >
+              Como Funciona
             </a>
             <motion.button
               whileTap={{ scale: 0.9 }}
