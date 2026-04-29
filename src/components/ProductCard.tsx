@@ -26,15 +26,13 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
       return imagePath;
     }
     
-    // Ensure we have a clean path without double slashes
-    const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
+    // In Vite/Vercel, assets in 'public' are served from the root.
+    // If we have a BASE_URL (like in GitHub Pages sub-folders), we should prepend it.
+    // Otherwise, for Vercel, it's usually just /
+    const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+    const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
     
-    // In Vite, BASE_URL is the base for public assets.
-    // Ensure baseUrl ends with a slash if it's not empty
-    const baseUrl = import.meta.env.BASE_URL;
-    const finalBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
-    
-    return `${finalBase}${cleanPath}`;
+    return `${baseUrl}${cleanPath}`;
   };
 
   return (
@@ -50,13 +48,10 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           src={getImageUrl(product.image)}
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-          referrerPolicy="no-referrer"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            // Fallback to a placeholder if the image fails to load
             if (!target.src.includes('images.unsplash.com')) {
-              console.error(`Failed to load image: ${product.image}`);
-              // target.src = 'https://images.unsplash.com/photo-1530103862676-fa8c9d34bb34?auto=format&fit=crop&w=800&q=80';
+              console.error(`Failed to load product image at: ${target.src}`);
             }
           }}
         />
