@@ -39,7 +39,7 @@ export default function Navbar({ cartCount, onCartClick, onSearch }: NavbarProps
           <span className="text-xl sm:text-2xl md:text-3xl font-display font-black tracking-tighter text-gray-900 cursor-pointer uppercase leading-none">
             BOA FESTA
           </span>
-          <span className="text-[8px] md:text-[10px] font-black tracking-[0.4em] text-pink-500 uppercase mt-1.5 ml-1">Pegue & Monte</span>
+          <span className="text-[7px] md:text-[10px] font-black tracking-[0.4em] text-pink-500 uppercase mt-2 ml-1">Pegue & Monte</span>
         </div>
 
         <div className="flex items-center gap-2 md:gap-6">

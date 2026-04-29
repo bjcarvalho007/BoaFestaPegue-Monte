@@ -43,37 +43,37 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
         </div>
       </div>
 
-      <div className="p-6 md:p-8 flex flex-col flex-1">
-        <div className="flex justify-between items-start mb-2 gap-4">
-          <h3 className="text-base md:text-lg font-bold text-gray-900 leading-tight">
+      <div className="p-5 md:p-8 flex flex-col flex-1">
+        <div className="flex justify-between items-start mb-2 gap-2 md:gap-4">
+          <h3 className="text-sm md:text-lg font-bold text-gray-900 leading-tight">
             {product.name}
           </h3>
-          <span className="text-base md:text-lg font-black text-gray-900 whitespace-nowrap">
+          <span className="text-sm md:text-lg font-black text-gray-900 whitespace-nowrap">
             R$ {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
           </span>
         </div>
-        <p className="text-sm text-gray-500 mb-6 line-clamp-2">
+        <p className="text-[10px] md:text-sm text-gray-500 mb-6 line-clamp-2">
           {product.description}
         </p>
 
-        <div className="mt-auto space-y-4">
+        <div className="mt-auto space-y-3 md:space-y-4">
           <div className="flex items-center justify-between bg-gray-50 rounded-xl p-1.5 md:p-2">
-            <span className="text-[9px] md:text-xs font-bold text-gray-400 uppercase ml-2">Quantidade</span>
+            <span className="text-[8px] md:text-xs font-bold text-gray-400 uppercase ml-2">Quantidade</span>
             <div className="flex items-center gap-2 md:gap-3">
               <button
                 onClick={() => adjustQuantity(-1)}
-                className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors"
+                className="w-6 h-6 md:w-8 md:h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors"
                 aria-label="Diminuir quantidade"
               >
-                <Minus size={12} />
+                <Minus size={10} />
               </button>
-              <span className="text-xs md:text-sm font-bold w-4 text-center">{quantity}</span>
+              <span className="text-[10px] md:text-sm font-bold w-4 text-center">{quantity}</span>
               <button
                 onClick={() => adjustQuantity(1)}
-                className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors"
+                className="w-6 h-6 md:w-8 md:h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors"
                 aria-label="Aumentar quantidade"
               >
-                <Plus size={12} />
+                <Plus size={10} />
               </button>
             </div>
           </div>
@@ -82,9 +82,9 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => onAddToCart(product, quantity)}
-            className="w-full bg-black text-white py-3.5 md:py-3 rounded-2xl font-black uppercase tracking-widest text-[9px] md:text-[10px] flex items-center justify-center gap-2 md:gap-3 hover:bg-gray-800 transition-colors shadow-lg shadow-gray-200"
+            className="w-full bg-black text-white py-3 md:py-3 rounded-xl md:rounded-2xl font-black uppercase tracking-widest text-[8px] md:text-[10px] flex items-center justify-center gap-2 md:gap-3 hover:bg-gray-800 transition-colors shadow-lg shadow-gray-200"
           >
-            <ShoppingCart size={16} />
+            <ShoppingCart size={14} />
             ADICIONAR AO CARRINHO
           </motion.button>
         </div>

@@ -83,36 +83,36 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center lg:text-left pt-8 lg:pt-0"
+              className="text-center lg:text-left pt-4 lg:pt-0 max-w-xl mx-auto lg:mx-0"
             >
-              <div className="inline-flex items-center gap-3 px-4 py-2 bg-pink-50 rounded-full text-[10px] md:text-xs font-bold text-pink-600 mb-6 lg:mb-8 uppercase tracking-[0.2em]">
-                <Sparkles size={14} />
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-pink-50 rounded-full text-[9px] md:text-xs font-bold text-pink-600 mb-6 lg:mb-8 uppercase tracking-[0.2em]">
+                <Sparkles size={12} />
                 Celebre com estilo
               </div>
-              <h1 className="text-4xl sm:text-6xl md:text-8xl font-display font-extrabold tracking-tight leading-[1.1] mb-6 lg:mb-10 uppercase text-gray-900">
+              <h1 className="text-3xl sm:text-6xl md:text-8xl font-display font-extrabold tracking-tight leading-[1.1] mb-6 lg:mb-10 uppercase text-gray-900">
                 A Festa <br className="hidden sm:block" />
                 Dos Seus <br className="hidden sm:block" />
                 <span className="text-pink-500">Sonhos</span>
               </h1>
-              <p className="text-base md:text-xl text-gray-500 mb-8 lg:mb-12 max-w-sm sm:max-w-md mx-auto lg:mx-0 leading-relaxed font-light">
+              <p className="text-sm md:text-xl text-gray-500 mb-8 lg:mb-12 max-w-sm sm:max-w-md mx-auto lg:mx-0 leading-relaxed font-light px-4 sm:px-0">
                 Kits decorativos <span className="text-black font-semibold">Pegue & Monte</span>. A solução prática, econômica e elegante para transformar qualquer ambiente.
               </p>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 md:gap-4 px-2 sm:px-0">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 md:gap-4 px-4 sm:px-0">
                 <motion.a
                   href="#catalogo"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-black text-white px-8 md:px-10 py-4 md:py-5 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-gray-800 transition-all shadow-xl shadow-gray-200"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-black text-white px-8 md:px-10 py-3.5 md:py-5 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-gray-800 transition-all shadow-xl shadow-gray-200"
                 >
                   Ver Catálogo
-                  <ArrowRight size={18} />
+                  <ArrowRight size={16} />
                 </motion.a>
                 <motion.a
                   href="#como-funciona"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white text-black border border-gray-200 px-8 md:px-10 py-4 md:py-5 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-gray-50 transition-all shadow-lg shadow-gray-100"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white text-black border border-gray-200 px-8 md:px-10 py-3.5 md:py-5 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-gray-50 transition-all shadow-lg shadow-gray-100"
                 >
                   Como Funciona
                 </motion.a>
@@ -171,14 +171,14 @@ export default function App() {
         </div>
 
         {/* Section Title */}
-        <section className="max-w-7xl mx-auto pt-16 md:pt-24 px-6 md:px-12">
+        <section className="max-w-7xl mx-auto pt-16 md:pt-24 px-4 sm:px-6 md:px-12">
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight uppercase mb-4">Escolha seu Tema</h2>
             <p className="text-gray-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">Kits completos prontos para a sua festa</p>
             <div className="w-12 md:w-16 h-1 bg-pink-500 mx-auto mt-6 rounded-full" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-12 lg:gap-16">
             <AnimatePresence mode="popLayout">
               {filteredProducts.map((product) => (
                 <ProductCard
@@ -204,7 +204,7 @@ export default function App() {
         </section>
 
         {/* How it Works Section */}
-        <section id="como-funciona" className="bg-white py-16 md:py-24 px-6 md:px-12">
+        <section id="como-funciona" className="bg-white py-16 md:py-24 px-4 sm:px-6 md:px-12">
           <div className="max-w-7xl mx-auto text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight uppercase mb-4 text-gray-900">Como Funciona</h2>
             <p className="text-gray-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em]">Locação simples e sem complicação</p>
