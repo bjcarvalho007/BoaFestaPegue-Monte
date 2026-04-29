@@ -33,21 +33,27 @@ export default function App() {
     });
   }, [searchQuery, selectedCategory]);
 
-  const handleAddToCart = (product: Product) => {
+  const handleAddToCart = (product: Product, quantity: number = 1) => {
     setCartItems((prev) => {
       const existing = prev.find((item) => item.id === product.id);
       if (existing) {
         return prev.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
         );
       }
-      return [...prev, { ...product, quantity: 1 }];
+      return [...prev, { ...product, quantity }];
     });
     setIsCartOpen(true);
   };
 
   const handleRemoveFromCart = (id: string) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const handleUpdateQuantity = (id: string, quantity: number) => {
+    setCartItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, quantity } : item))
+    );
   };
 
   const handleAddReview = (newReview: Omit<Review, 'id' | 'date'>) => {
@@ -72,47 +78,58 @@ export default function App() {
         <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-white">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(244,114,182,0.08),transparent_50%)]" />
           
-          <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center px-6 md:px-12 relative z-10 py-12">
+          <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 lg:gap-16 items-center px-6 md:px-12 relative z-10 py-12 lg:py-24">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
+              className="text-center lg:text-left"
             >
-              <div className="inline-flex items-center gap-3 px-4 py-2 bg-pink-50 rounded-full text-xs font-bold text-pink-600 mb-8 uppercase tracking-[0.2em] animate-pulse">
+              <div className="inline-flex items-center gap-3 px-4 py-2 bg-pink-50 rounded-full text-[10px] md:text-xs font-bold text-pink-600 mb-8 uppercase tracking-[0.2em] animate-pulse">
                 <Sparkles size={14} />
                 Celebre com estilo
               </div>
-              <h1 className="text-7xl md:text-8xl font-display font-extrabold tracking-tight leading-[1.1] mb-10 uppercase text-gray-900">
-                A Festa <br />
-                Dos Seus <br />
+              <h1 className="text-5xl sm:text-7xl md:text-8xl font-display font-extrabold tracking-tight leading-[1.1] mb-8 lg:mb-10 uppercase text-gray-900">
+                A Festa <br className="hidden sm:block" />
+                Dos Seus <br className="hidden sm:block" />
                 <span className="text-pink-500">Sonhos</span>
               </h1>
-              <p className="text-xl text-gray-500 mb-12 max-w-md leading-relaxed font-light">
+              <p className="text-lg md:text-xl text-gray-500 mb-10 lg:mb-12 max-w-md mx-auto lg:mx-0 leading-relaxed font-light">
                 Kits decorativos <span className="text-black font-semibold">Pegue & Monte</span>. A solução prática, econômica e elegante para transformar qualquer ambiente.
               </p>
               
-              <motion.a
-                href="#como-funciona"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-3 bg-pink-500 text-white px-10 py-5 rounded-[2rem] text-sm font-black uppercase tracking-widest hover:bg-pink-600 transition-all shadow-2xl shadow-pink-200"
-              >
-                Como Funciona
-                <ArrowRight size={20} className="text-pink-100" />
-              </motion.a>
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 px-4 sm:px-0">
+                <motion.a
+                  href="#catalogo"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-black text-white px-8 md:px-10 py-4 md:py-5 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-gray-800 transition-all shadow-xl shadow-gray-200"
+                >
+                  Ver Catálogo
+                  <ArrowRight size={18} />
+                </motion.a>
+                <motion.a
+                  href="#como-funciona"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-pink-500 text-white px-8 md:px-10 py-4 md:py-5 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-pink-600 transition-all shadow-xl shadow-pink-200"
+                >
+                  Como Funciona
+                </motion.a>
+              </div>
             </motion.div>
             
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="relative aspect-square lg:aspect-auto h-full min-h-[400px]"
+              className="relative aspect-[4/3] sm:aspect-square lg:aspect-auto h-full min-h-[300px] sm:min-h-[400px] md:min-h-[450px]"
             >
-              <div className="absolute inset-0 bg-pink-100/50 rounded-[4rem] rotate-3 -z-10" />
+              <div className="absolute inset-0 bg-pink-100/50 rounded-[2.5rem] md:rounded-[4rem] rotate-3 -z-10" />
               <img
                 src="https://images.unsplash.com/photo-1530103043960-ef38714abb15?auto=format&fit=crop&w=1200&q=80"
                 alt="Decoração Boa Festa"
-                className="w-full h-full object-cover rounded-[4rem] shadow-3xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover rounded-[2.5rem] md:rounded-[4rem] shadow-3xl grayscale-[20%] hover:grayscale-0 transition-all duration-700"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute -bottom-10 -left-10 bg-white p-8 rounded-3xl shadow-xl hidden xl:block">
@@ -129,13 +146,13 @@ export default function App() {
         </section>
 
         {/* Categories Bar - Sticky feeling */}
-        <div id="catalogo" className="bg-white border-y border-gray-100 py-6 px-6 overflow-x-auto no-scrollbar">
-          <div className="max-w-7xl mx-auto flex items-center justify-center gap-10 min-w-max">
+        <div id="catalogo" className="bg-white border-y border-gray-100 py-4 px-4 overflow-x-auto no-scrollbar sticky top-[88px] z-40 backdrop-blur-md bg-white/90">
+          <div className="max-w-7xl mx-auto flex items-center justify-center gap-6 md:gap-10 min-w-max">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`relative py-2 text-xs font-bold uppercase tracking-widest transition-all ${
+                className={`relative py-3 px-1 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all ${
                   selectedCategory === cat
                     ? 'text-pink-500'
                     : 'text-gray-400 hover:text-black'
@@ -145,7 +162,7 @@ export default function App() {
                 {selectedCategory === cat && (
                   <motion.div
                     layoutId="activeCategory"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-pink-500"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-pink-500"
                   />
                 )}
               </button>
@@ -154,14 +171,14 @@ export default function App() {
         </div>
 
         {/* Section Title */}
-        <section className="max-w-7xl mx-auto pt-24 px-6 md:px-12">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight uppercase mb-4">Escolha seu Tema</h2>
-            <p className="text-gray-400 text-sm font-bold uppercase tracking-widest">Kits completos prontos para a sua festa</p>
-            <div className="w-16 h-1 bg-pink-500 mx-auto mt-6 rounded-full" />
+        <section className="max-w-7xl mx-auto pt-16 md:pt-24 px-6 md:px-12">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight uppercase mb-4">Escolha seu Tema</h2>
+            <p className="text-gray-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">Kits completos prontos para a sua festa</p>
+            <div className="w-12 md:w-16 h-1 bg-pink-500 mx-auto mt-6 rounded-full" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
             <AnimatePresence mode="popLayout">
               {filteredProducts.map((product) => (
                 <ProductCard
@@ -187,23 +204,23 @@ export default function App() {
         </section>
 
         {/* How it Works Section */}
-        <section id="como-funciona" className="bg-white py-24 px-6 md:px-12">
-          <div className="max-w-7xl mx-auto text-center mb-16">
-            <h2 className="text-4xl font-display font-bold tracking-tight uppercase mb-2 text-gray-900">Como Funciona</h2>
-            <p className="text-gray-400 text-xs font-bold uppercase tracking-[0.3em]">Locação simples e sem complicação</p>
+        <section id="como-funciona" className="bg-white py-16 md:py-24 px-6 md:px-12">
+          <div className="max-w-7xl mx-auto text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight uppercase mb-4 text-gray-900">Como Funciona</h2>
+            <p className="text-gray-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em]">Locação simples e sem complicação</p>
           </div>
 
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12">
             {[
               { step: '01', title: 'Escolha', desc: 'Navegue pelos temas e selecione o kit perfeito para sua celebração.' },
               { step: '02', title: 'Reserve', desc: 'Reserve o kit com antecedência para garantir a data da sua festa.' },
               { step: '03', title: 'Retire', desc: 'Retire o kit completo e limpo em nosso ponto de entrega.' },
               { step: '04', title: 'Celebre', desc: 'Monte do seu jeito e aproveite momentos inesquecíveis!' }
             ].map((item, idx) => (
-              <div key={idx} className="relative p-8 bg-gray-50 rounded-[2.5rem] border border-gray-100 hover:border-pink-200 transition-colors group">
-                <span className="text-5xl font-display font-black text-pink-100 absolute top-4 right-6 group-hover:text-pink-200 transition-colors">{item.step}</span>
-                <h3 className="text-xl font-bold uppercase tracking-tight mb-4 relative z-10">{item.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed relative z-10">{item.desc}</p>
+              <div key={idx} className="relative p-6 md:p-8 bg-gray-50 rounded-[2rem] md:rounded-[2.5rem] border border-gray-100 hover:border-pink-200 transition-colors group">
+                <span className="text-4xl md:text-5xl font-display font-black text-pink-100 absolute top-4 right-6 group-hover:text-pink-200 transition-colors">{item.step}</span>
+                <h3 className="text-lg md:text-xl font-bold uppercase tracking-tight mb-4 relative z-10">{item.title}</h3>
+                <p className="text-gray-500 text-xs md:text-sm leading-relaxed relative z-10">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -218,40 +235,37 @@ export default function App() {
         </div>
       </main>
 
-      <footer id="contato" className="bg-white py-12 px-6 md:px-12 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
-          <span className="text-2xl font-display font-black text-gray-900 tracking-tight uppercase">BOA FESTA</span>
-          <div className="flex flex-col items-center">
-            <p className="text-sm text-gray-400">© 2024 Boa Festa - Pegue & Monte. Todos os direitos reservados.</p>
-            <p className="text-xs text-black font-bold mt-2 uppercase tracking-widest">Desenvolvido por B.J.C</p>
+      <footer id="contato" className="bg-white py-16 px-6 md:px-12 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <span className="text-3xl font-display font-black text-gray-900 tracking-tight uppercase leading-none">BOA FESTA</span>
+            <span className="text-[10px] font-bold tracking-[0.4em] text-pink-500 uppercase mt-1">Pegue & Monte</span>
+            <p className="mt-6 text-sm text-gray-400 max-w-xs leading-relaxed">Transformando sonhos em realidade com praticidade e elegância.</p>
           </div>
-          <div className="flex flex-wrap justify-center md:justify-end gap-4 items-center">
-            <a 
-              href={`mailto:${CONTACT_EMAIL}`}
-              className="group flex items-center gap-3 bg-gray-50 hover:bg-pink-50 text-gray-600 hover:text-pink-600 px-5 py-3 rounded-2xl transition-all duration-300 border border-gray-100"
-              title="Enviar E-mail"
-            >
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                <Mail size={16} />
-              </div>
-              <span className="text-xs font-bold uppercase tracking-widest hidden sm:inline">E-mail</span>
-            </a>
-            
-            <a 
-              href="https://www.instagram.com/boa_festapegueemonte?igsh=aGE2bDZuMmNhbHJi" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="group flex items-center gap-3 bg-gray-50 hover:bg-pink-50 text-gray-600 hover:text-pink-600 px-5 py-3 rounded-2xl transition-all duration-300 border border-gray-100"
-              title="Instagram"
-            >
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                <Instagram size={16} />
-              </div>
-              <span className="text-xs font-bold uppercase tracking-widest hidden sm:inline">Instagram</span>
-            </a>
 
-            <div className="h-8 w-px bg-gray-100 mx-2 hidden md:block" />
-            {/* Rodapé limpo sem links redundantes */}
+          <div className="flex flex-col items-center">
+            <div className="flex gap-4 mb-4">
+              <a 
+                href="https://www.instagram.com/boa_festapegueemonte?igsh=aGE2bDZuMmNhbHJi" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 hover:text-pink-500 hover:bg-pink-50 transition-all duration-300 border border-gray-100 shadow-sm"
+              >
+                <Instagram size={20} />
+              </a>
+              <a 
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-all duration-300 border border-gray-100 shadow-sm"
+              >
+                <Mail size={20} />
+              </a>
+            </div>
+            <p className="text-[10px] text-gray-300 font-bold uppercase tracking-[0.2em]">© 2024 BOA FESTA - TODOS OS DIREITOS RESERVADOS</p>
+          </div>
+
+          <div className="flex flex-col items-center md:items-end">
+            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">PROJETO BY</p>
+            <p className="text-sm font-black tracking-tighter text-gray-900">B.J.C</p>
           </div>
         </div>
       </footer>
@@ -261,6 +275,7 @@ export default function App() {
         onClose={() => setIsCartOpen(false)}
         items={cartItems}
         onRemove={handleRemoveFromCart}
+        onUpdateQuantity={handleUpdateQuantity}
       />
 
       <FloatingWhatsApp />

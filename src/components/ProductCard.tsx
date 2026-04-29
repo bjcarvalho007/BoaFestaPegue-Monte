@@ -3,45 +3,52 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Plus } from 'lucide-react';
+import { Plus, Minus, ShoppingCart } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useState } from 'react';
 import { Product } from '../types';
 
 interface ProductCardProps {
   product: Product;
-  onAddToCart: (product: Product) => void;
+  onAddToCart: (product: Product, quantity: number) => void;
   key?: string | number;
 }
 
 export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
+  const [quantity, setQuantity] = useState(1);
+
+  const adjustQuantity = (amount: number) => {
+    setQuantity(prev => Math.max(1, prev + amount));
+  };
+
   return (
     <motion.div
       layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="group bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-gray-200 transition-all hover:shadow-xl flex flex-col h-full"
+      className="group bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-gray-100 hover:border-pink-200 transition-all duration-500 hover:shadow-2xl hover:shadow-pink-50/50 flex flex-col h-full"
       id={`product-${product.id}`}
     >
-      <div className="relative aspect-square overflow-hidden bg-gray-50">
+      <div className="relative aspect-[4/5] sm:aspect-square overflow-hidden bg-gray-50">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 grayscale-[10%] group-hover:grayscale-0"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute top-4 left-4">
-          <span className="bg-pink-500 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-sm">
+        <div className="absolute top-3 left-3 md:top-4 md:left-4">
+          <span className="bg-white/90 backdrop-blur-md text-pink-500 border border-pink-100 px-3 py-1 rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-widest shadow-sm">
             {product.category}
           </span>
         </div>
       </div>
 
-      <div className="p-6 flex flex-col flex-1">
-        <div className="flex justify-between items-start mb-2">
-          <h3 className="text-lg font-medium text-gray-900 leading-tight">
+      <div className="p-6 md:p-8 flex flex-col flex-1">
+        <div className="flex justify-between items-start mb-2 gap-4">
+          <h3 className="text-base md:text-lg font-bold text-gray-900 leading-tight">
             {product.name}
           </h3>
-          <span className="text-lg font-bold text-gray-900">
+          <span className="text-base md:text-lg font-black text-gray-900 whitespace-nowrap">
             R$ {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
           </span>
         </div>
@@ -49,15 +56,36 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           {product.description}
         </p>
 
-        <div className="mt-auto">
+        <div className="mt-auto space-y-4">
+          <div className="flex items-center justify-between bg-gray-50 rounded-xl p-1.5 md:p-2">
+            <span className="text-[9px] md:text-xs font-bold text-gray-400 uppercase ml-2">Quantidade</span>
+            <div className="flex items-center gap-2 md:gap-3">
+              <button
+                onClick={() => adjustQuantity(-1)}
+                className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors"
+                aria-label="Diminuir quantidade"
+              >
+                <Minus size={12} />
+              </button>
+              <span className="text-xs md:text-sm font-bold w-4 text-center">{quantity}</span>
+              <button
+                onClick={() => adjustQuantity(1)}
+                className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors"
+                aria-label="Aumentar quantidade"
+              >
+                <Plus size={12} />
+              </button>
+            </div>
+          </div>
+
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => onAddToCart(product)}
-            className="w-full bg-black text-white py-3 rounded-2xl font-medium flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors"
+            onClick={() => onAddToCart(product, quantity)}
+            className="w-full bg-black text-white py-3.5 md:py-3 rounded-2xl font-black uppercase tracking-widest text-[9px] md:text-[10px] flex items-center justify-center gap-2 md:gap-3 hover:bg-gray-800 transition-colors shadow-lg shadow-gray-200"
           >
-            <Plus size={18} />
-            Reservar para minha Festa
+            <ShoppingCart size={16} />
+            ADICIONAR AO CARRINHO
           </motion.button>
         </div>
       </div>

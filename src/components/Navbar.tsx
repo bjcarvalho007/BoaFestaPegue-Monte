@@ -36,13 +36,14 @@ export default function Navbar({ cartCount, onCartClick, onSearch }: NavbarProps
         </div>
 
         <div className="flex flex-col items-center">
-          <span className="text-2xl md:text-3xl font-display font-extrabold tracking-tight text-gray-900 cursor-pointer uppercase leading-none">
+          <span className="text-lg sm:text-xl md:text-3xl font-display font-extrabold tracking-tight text-gray-900 cursor-pointer uppercase leading-none">
             BOA FESTA
           </span>
-          <span className="text-[9px] font-bold tracking-[0.4em] text-pink-500 uppercase mt-1">Pegue & Monte</span>
+          <span className="text-[7px] md:text-[9px] font-bold tracking-[0.4em] text-pink-500 uppercase mt-1">Pegue & Monte</span>
         </div>
 
-        <div className="flex items-center gap-3 md:gap-6">
+        <div className="flex items-center gap-2 md:gap-6">
+          {/* Desktop Search */}
           <div className="hidden md:flex items-center bg-gray-50 rounded-full px-5 py-2.5 border border-gray-100 focus-within:border-pink-200 transition-all">
             <Search className="text-gray-400" size={16} />
             <input
@@ -54,11 +55,21 @@ export default function Navbar({ cartCount, onCartClick, onSearch }: NavbarProps
           </div>
 
           <div className="flex items-center gap-2 md:gap-4">
-            <a 
-              href="#como-funciona" 
-              className="hidden md:flex items-center gap-2 bg-pink-500 text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-pink-600 transition-all shadow-lg shadow-pink-200"
+            <button
+              className="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+              onClick={() => {
+                const query = prompt('Buscar tema:');
+                if (query !== null) onSearch(query);
+              }}
+              aria-label="Buscar"
             >
-              Como Funciona
+              <Search size={20} />
+            </button>
+            <a 
+              href="#catalogo" 
+              className="hidden sm:flex items-center gap-2 bg-pink-500 text-white px-5 md:px-6 py-2.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest hover:bg-pink-600 transition-all shadow-lg shadow-pink-200"
+            >
+              Catálogo
             </a>
             <motion.button
               whileTap={{ scale: 0.9 }}
@@ -108,8 +119,16 @@ export default function Navbar({ cartCount, onCartClick, onSearch }: NavbarProps
                 <a href="#depoimentos" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold uppercase tracking-tighter hover:text-pink-500">Quem já Alugou</a>
               </div>
 
-              <div className="mt-auto">
-                <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold text-center">
+              <div className="mt-auto pt-8 border-t border-gray-100 italic">
+                <div className="flex justify-center gap-6 mb-6">
+                  <a href="https://www.instagram.com/boa_festapegueemonte?igsh=aGE2bDZuMmNhbHJi" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition-colors">
+                    <Instagram size={20} />
+                  </a>
+                  <a href={`mailto:${CONTACT_EMAIL}`} className="text-gray-400 hover:text-black transition-colors">
+                    <Mail size={20} />
+                  </a>
+                </div>
+                <p className="text-[9px] text-gray-400 uppercase tracking-widest font-bold text-center">
                   Boa Festa - Pegue & Monte
                 </p>
               </div>

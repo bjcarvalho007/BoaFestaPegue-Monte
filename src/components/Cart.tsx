@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { X, Trash2, ShoppingBag } from 'lucide-react';
+import { X, Trash2, ShoppingBag, Plus, Minus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CartItem } from '../types';
 import { WHATSAPP_NUMBER } from '../constants';
@@ -13,9 +13,10 @@ interface CartProps {
   onClose: () => void;
   items: CartItem[];
   onRemove: (id: string) => void;
+  onUpdateQuantity: (id: string, quantity: number) => void;
 }
 
-export default function Cart({ isOpen, onClose, items, onRemove }: CartProps) {
+export default function Cart({ isOpen, onClose, items, onRemove, onUpdateQuantity }: CartProps) {
   const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   const handleCheckout = () => {
@@ -57,8 +58,8 @@ export default function Cart({ isOpen, onClose, items, onRemove }: CartProps) {
             className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-[70] flex flex-col"
           >
             <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-              <h2 className="text-xl font-bold flex items-center gap-3">
-                <ShoppingBag size={24} />
+              <h2 className="text-xl font-bold flex items-center gap-3 font-display uppercase tracking-tight">
+                <ShoppingBag size={24} className="text-pink-500" />
                 Sua Reserva
               </h2>
               <button
@@ -96,21 +97,38 @@ export default function Cart({ isOpen, onClose, items, onRemove }: CartProps) {
                     </div>
                     <div className="flex-1 flex flex-col justify-between py-1">
                       <div>
-                        <h4 className="font-semibold text-gray-900 leading-tight">
-                          {item.name}
-                        </h4>
-                        <p className="text-sm text-gray-500">Qtd: {item.quantity}</p>
+                        <div className="flex justify-between items-start">
+                          <h4 className="font-semibold text-gray-900 leading-tight pr-4">
+                            {item.name}
+                          </h4>
+                          <button
+                            onClick={() => onRemove(item.id)}
+                            className="p-1 text-gray-300 hover:text-red-500 transition-colors"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-bold text-gray-900">
+                      
+                      <div className="flex items-center justify-between mt-2">
+                        <div className="flex items-center bg-gray-50 rounded-lg p-1">
+                          <button
+                            onClick={() => onUpdateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                            className="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-black transition-colors"
+                          >
+                            <Minus size={12} />
+                          </button>
+                          <span className="text-xs font-bold w-6 text-center">{item.quantity}</span>
+                          <button
+                            onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                            className="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-black transition-colors"
+                          >
+                            <Plus size={12} />
+                          </button>
+                        </div>
+                        <span className="font-bold text-gray-900 text-sm">
                           R$ {(item.price * item.quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                         </span>
-                        <button
-                          onClick={() => onRemove(item.id)}
-                          className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
-                        >
-                          <Trash2 size={18} />
-                        </button>
                       </div>
                     </div>
                   </div>
@@ -121,16 +139,16 @@ export default function Cart({ isOpen, onClose, items, onRemove }: CartProps) {
             {items.length > 0 && (
               <div className="p-6 border-t border-gray-100 bg-gray-50/50">
                 <div className="flex justify-between items-center mb-6 px-2">
-                  <span className="text-gray-500 font-medium italic">Total Locação</span>
-                  <span className="text-2xl font-bold text-gray-900">
+                  <span className="text-gray-400 font-bold uppercase text-[10px] tracking-widest leading-none">Total Locação</span>
+                  <span className="text-2xl font-black text-gray-900 tracking-tight">
                     R$ {total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                   </span>
                 </div>
                 <button 
                   onClick={handleCheckout}
-                  className="w-full bg-pink-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-pink-700 transition-all shadow-lg shadow-pink-100 flex items-center justify-center gap-2 group active:scale-95"
+                  className="w-full bg-black text-white py-4 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-gray-800 transition-all shadow-xl shadow-gray-200 flex items-center justify-center gap-3 group active:scale-95"
                 >
-                  Confirmar Reserva via WhatsApp
+                  Confirmar via WhatsApp
                 </button>
               </div>
             )}

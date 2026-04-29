@@ -28,7 +28,7 @@ export default function Testimonials({ reviews, onAddFeedback }: TestimonialsPro
   const review = reviews[index] || reviews[0];
 
   return (
-    <section className="bg-gray-50 py-24 px-6 md:px-12 overflow-hidden border-y border-gray-100 relative">
+    <section className="bg-gray-50 py-16 md:py-24 px-6 md:px-12 overflow-hidden border-y border-gray-100 relative">
       <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
         <div className="inline-flex items-center justify-center w-12 h-12 bg-black text-white rounded-2xl mb-6">
           <Quote size={24} fill="currentColor" />
@@ -36,7 +36,7 @@ export default function Testimonials({ reviews, onAddFeedback }: TestimonialsPro
         
         <h2 className="text-3xl font-display font-bold mb-12 tracking-tight uppercase">O que nossos clientes dizem</h2>
 
-        <div className="relative h-[250px] md:h-[200px] flex items-center justify-center w-full">
+        <div className="relative min-h-[350px] sm:min-h-[280px] md:min-h-[220px] flex items-center justify-center w-full">
           <AnimatePresence mode="wait">
             {review && (
               <motion.div
@@ -45,7 +45,7 @@ export default function Testimonials({ reviews, onAddFeedback }: TestimonialsPro
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: -10 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="absolute w-full px-4"
+                className="w-full px-4"
               >
                 <div className="flex justify-center gap-1 mb-6">
                   {[...Array(5)].map((_, i) => (
