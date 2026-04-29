@@ -31,10 +31,17 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
     >
       <div className="relative aspect-[4/5] sm:aspect-square overflow-hidden bg-gray-50">
         <img
-          src={product.image}
+          src={product.image.startsWith('http') || product.image.startsWith('data:') ? product.image : `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${product.image.replace(/^\//, '')}`}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 grayscale-[10%] group-hover:grayscale-0"
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           referrerPolicy="no-referrer"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            if (target.src.includes('regenerated_image')) {
+              // Try fallback if the generated image fails for some reason
+              console.error(`Failed to load image: ${product.image}`);
+            }
+          }}
         />
         <div className="absolute top-3 left-3 md:top-4 md:left-4">
           <span className="bg-white/90 backdrop-blur-md text-pink-500 border border-pink-100 px-3 py-1 rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-widest shadow-sm">
