@@ -21,6 +21,22 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
     setQuantity(prev => Math.max(1, prev + amount));
   };
 
+  const getImageUrl = (imagePath: string) => {
+    if (imagePath.startsWith('http') || imagePath.startsWith('data:')) {
+      return imagePath;
+    }
+    
+    // Ensure we have a clean path without double slashes
+    const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
+    
+    // In Vite, BASE_URL is the base for public assets.
+    // Ensure baseUrl ends with a slash if it's not empty
+    const baseUrl = import.meta.env.BASE_URL;
+    const finalBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+    
+    return `${finalBase}${cleanPath}`;
+  };
+
   return (
     <motion.div
       layout
@@ -31,15 +47,16 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
     >
       <div className="relative aspect-[4/5] sm:aspect-square overflow-hidden bg-gray-50">
         <img
-          src={product.image.startsWith('http') || product.image.startsWith('data:') ? product.image : `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${product.image.replace(/^\//, '')}`}
+          src={getImageUrl(product.image)}
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           referrerPolicy="no-referrer"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            if (target.src.includes('regenerated_image')) {
-              // Try fallback if the generated image fails for some reason
+            // Fallback to a placeholder if the image fails to load
+            if (!target.src.includes('images.unsplash.com')) {
               console.error(`Failed to load image: ${product.image}`);
+              // target.src = 'https://images.unsplash.com/photo-1530103862676-fa8c9d34bb34?auto=format&fit=crop&w=800&q=80';
             }
           }}
         />
