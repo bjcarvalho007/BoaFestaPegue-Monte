@@ -13,7 +13,7 @@ import FloatingWhatsApp from './components/FloatingWhatsApp';
 import ReviewForm from './components/ReviewForm';
 import { PRODUCTS, REVIEWS, CATEGORIES } from './data/mockData';
 import { Product, CartItem, Review } from './types';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, Instagram } from 'lucide-react';
 
 export default function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
