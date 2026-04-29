@@ -20,7 +20,7 @@ export default function Navbar({ cartCount, onCartClick, onSearch }: NavbarProps
   return (
     <header className="sticky top-0 z-50 w-full font-sans">
       <nav className="bg-white/95 backdrop-blur-xl border-b border-gray-100 py-5 px-6 md:px-12 flex items-center justify-between shadow-sm">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 flex-1">
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="lg:hidden p-2 hover:bg-gray-100 rounded-full transition-colors active:scale-95"
@@ -35,14 +35,14 @@ export default function Navbar({ cartCount, onCartClick, onSearch }: NavbarProps
           </div>
         </div>
 
-        <div className="flex flex-col items-center">
-          <span className="text-xl sm:text-2xl md:text-3xl font-display font-black tracking-tighter text-gray-900 cursor-pointer uppercase leading-none">
+        <div className="flex flex-col items-center flex-1">
+          <span className="text-base sm:text-2xl md:text-3xl font-display font-black tracking-tighter text-gray-900 cursor-pointer uppercase leading-none text-center">
             BOA FESTA
           </span>
-          <span className="text-[7px] md:text-[10px] font-black tracking-[0.4em] text-pink-500 uppercase mt-2 ml-1">Pegue & Monte</span>
+          <span className="text-[6px] md:text-[10px] font-black tracking-[0.4em] text-pink-500 uppercase mt-0.5 md:mt-2 text-center">Pegue & Monte</span>
         </div>
 
-        <div className="flex items-center gap-2 md:gap-6">
+        <div className="flex items-center gap-2 md:gap-6 flex-1 justify-end">
           {/* Desktop Search */}
           <div className="hidden md:flex items-center bg-gray-50 rounded-full px-5 py-2.5 border border-gray-100 focus-within:border-pink-200 transition-all">
             <Search className="text-gray-400" size={16} />

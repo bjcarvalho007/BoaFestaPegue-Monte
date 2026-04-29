@@ -75,35 +75,35 @@ export default function App() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative min-h-[700px] lg:min-h-[85vh] flex items-center overflow-hidden bg-white">
+        <section className="relative min-h-[600px] lg:min-h-[85vh] flex items-center overflow-hidden bg-white">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(244,114,182,0.08),transparent_50%)]" />
           
-          <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-8 lg:gap-16 items-center px-6 md:px-12 relative z-10 py-16 lg:py-24">
+          <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-8 lg:gap-16 items-center px-4 sm:px-6 md:px-12 relative z-10 py-8 md:py-16 lg:py-24">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center lg:text-left pt-4 lg:pt-0 max-w-xl mx-auto lg:mx-0"
+              className="text-center lg:text-left pt-2 lg:pt-0"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-pink-50 rounded-full text-[9px] md:text-xs font-bold text-pink-600 mb-6 lg:mb-8 uppercase tracking-[0.2em]">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-pink-50 rounded-full text-[9px] md:text-xs font-bold text-pink-600 mb-4 lg:mb-8 uppercase tracking-[0.2em]">
                 <Sparkles size={12} />
                 Celebre com estilo
               </div>
-              <h1 className="text-3xl sm:text-6xl md:text-8xl font-display font-extrabold tracking-tight leading-[1.1] mb-6 lg:mb-10 uppercase text-gray-900">
+              <h1 className="text-3xl sm:text-6xl md:text-8xl font-display font-extrabold tracking-tight leading-[1.1] mb-4 lg:mb-10 uppercase text-gray-900 px-4 sm:px-0">
                 A Festa <br className="hidden sm:block" />
                 Dos Seus <br className="hidden sm:block" />
                 <span className="text-pink-500">Sonhos</span>
               </h1>
-              <p className="text-sm md:text-xl text-gray-500 mb-8 lg:mb-12 max-w-sm sm:max-w-md mx-auto lg:mx-0 leading-relaxed font-light px-4 sm:px-0">
+              <p className="text-sm md:text-xl text-gray-500 mb-6 lg:mb-12 max-w-sm sm:max-w-md mx-auto lg:mx-0 leading-relaxed font-light px-8 sm:px-0">
                 Kits decorativos <span className="text-black font-semibold">Pegue & Monte</span>. A solução prática, econômica e elegante para transformar qualquer ambiente.
               </p>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 md:gap-4 px-4 sm:px-0">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 md:gap-4 px-8 sm:px-0 mb-8">
                 <motion.a
                   href="#catalogo"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-black text-white px-8 md:px-10 py-3.5 md:py-5 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-gray-800 transition-all shadow-xl shadow-gray-200"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-black text-white px-8 md:px-10 py-4 md:py-5 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-gray-800 transition-all shadow-xl shadow-gray-200"
                 >
                   Ver Catálogo
                   <ArrowRight size={16} />
@@ -112,7 +112,7 @@ export default function App() {
                   href="#como-funciona"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white text-black border border-gray-200 px-8 md:px-10 py-3.5 md:py-5 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-gray-50 transition-all shadow-lg shadow-gray-100"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-pink-500 text-white px-8 md:px-10 py-4 md:py-5 rounded-2xl text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-pink-600 transition-all shadow-xl shadow-pink-200"
                 >
                   Como Funciona
                 </motion.a>
@@ -123,9 +123,9 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="relative aspect-[4/3] sm:aspect-square lg:aspect-auto h-full min-h-[280px] sm:min-h-[400px] md:min-h-[450px]"
+              className="relative aspect-[4/3] sm:aspect-square lg:aspect-auto h-full min-h-[250px] sm:min-h-[400px] md:min-h-[450px] px-6 sm:px-0"
             >
-              <div className="absolute inset-0 bg-pink-100/50 rounded-[2rem] md:rounded-[4rem] rotate-3 -z-10" />
+              <div className="absolute inset-6 sm:inset-0 bg-pink-100/50 rounded-[2rem] md:rounded-[4rem] rotate-3 -z-10" />
               <img
                 src="https://images.unsplash.com/photo-1530103043960-ef38714abb15?auto=format&fit=crop&w=1200&q=80"
                 alt="Decoração Boa Festa"
@@ -146,8 +146,8 @@ export default function App() {
         </section>
 
         {/* Categories Bar - Sticky feeling */}
-        <div id="catalogo" className="bg-white border-y border-gray-100 py-4 px-6 overflow-x-auto no-scrollbar sticky top-[72px] md:top-[88px] z-40 backdrop-blur-md bg-white/95">
-          <div className="max-w-7xl mx-auto flex items-center justify-start md:justify-center gap-6 md:gap-10 min-w-max">
+        <div id="catalogo" className="bg-white border-y border-gray-100 py-4 px-4 overflow-x-auto no-scrollbar sticky top-[68px] md:top-[88px] z-40 backdrop-blur-md bg-white/95">
+          <div className="max-w-7xl mx-auto flex items-center justify-start md:justify-center gap-6 md:gap-10 min-w-max px-2 md:px-0">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
@@ -204,8 +204,8 @@ export default function App() {
         </section>
 
         {/* How it Works Section */}
-        <section id="como-funciona" className="bg-white py-16 md:py-24 px-4 sm:px-6 md:px-12">
-          <div className="max-w-7xl mx-auto text-center mb-12 md:mb-16">
+        <section id="como-funciona" className="bg-white py-16 md:py-24 px-4 sm:px-12">
+          <div className="max-w-7xl mx-auto text-center mb-12 md:mb-16 px-4">
             <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight uppercase mb-4 text-gray-900">Como Funciona</h2>
             <p className="text-gray-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em]">Locação simples e sem complicação</p>
           </div>
