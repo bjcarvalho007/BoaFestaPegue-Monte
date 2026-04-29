@@ -26,9 +26,6 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
       return imagePath;
     }
     
-    // For local public assets, Vite handles leading slash correctly from the root.
-    // If the image path already includes a leading slash, use it.
-    // Ensure we don't have double slashes if BASE_URL is involved.
     const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
     const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
     
@@ -43,20 +40,16 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
       className="group bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-gray-100 hover:border-pink-200 transition-all duration-500 hover:shadow-2xl hover:shadow-pink-50/50 flex flex-col h-full"
       id={`product-${product.id}`}
     >
-      <div className="relative aspect-square overflow-hidden bg-gray-100 flex items-center justify-center">
+      <div className="relative aspect-square overflow-hidden bg-gray-50 flex items-center justify-center">
         <img
           src={getImageUrl(product.image)}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            // Prevent infinite error loop if fallback fails
-            if (target.src.includes('placeholder')) return;
-            
-            console.error(`Error loading image: ${product.image}`);
-            // If it's a local image that failed, it might be due to deployment path issues
-            // No action taken here to avoid broken icons, but logging is helpful
+            if (target.src.includes('regenerated_image')) {
+              console.error(`Failed to load product image: ${product.image} at ${target.src}`);
+            }
           }}
         />
         <div className="absolute top-3 left-3 md:top-4 md:left-4">
