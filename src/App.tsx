@@ -212,9 +212,13 @@ export default function App() {
           <span className="text-2xl font-display font-black text-gray-900 tracking-tight uppercase">BOA FESTA</span>
           <div className="flex flex-col items-center">
             <p className="text-sm text-gray-400">© 2024 Boa Festa - Pegue & Monte. Todos os direitos reservados.</p>
+            <p className="text-sm text-pink-500 font-medium mt-1">miriankelly.8@gmail.com</p>
             <p className="text-xs text-black font-bold mt-2 uppercase tracking-widest">Desenvolvido por B.J.C</p>
           </div>
-          <div className="flex gap-8">
+          <div className="flex gap-8 items-center">
+            <a href="https://www.instagram.com/boa_festapegueemonte?igsh=aGE2bDZuMmNhbHJi" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition-colors">
+              <Instagram size={20} />
+            </a>
             <a href="#como-funciona" className="text-sm font-medium hover:text-pink-500 transition-colors">Como Funciona</a>
             <a href="#catalogo" className="text-sm font-medium hover:text-pink-500 transition-colors">Reservas</a>
           </div>

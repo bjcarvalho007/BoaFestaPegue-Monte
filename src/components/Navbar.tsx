@@ -53,7 +53,7 @@ export default function Navbar({ cartCount, onCartClick, onSearch }: NavbarProps
           </div>
 
           <div className="flex items-center gap-2 md:gap-4">
-            <a href="https://instagram.com" className="p-2.5 bg-gray-50 text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-full transition-all hidden sm:block">
+            <a href="https://www.instagram.com/boa_festapegueemonte?igsh=aGE2bDZuMmNhbHJi" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-gray-50 text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-full transition-all hidden sm:block">
               <Instagram size={20} />
             </a>
             <motion.button
