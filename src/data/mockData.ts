@@ -19,7 +19,7 @@ export const PRODUCTS: Product[] = [
     description: 'Kit completo temático Bolofofos. Preço Promocional! (Não trabalhamos com arco de balões)',
     price: 80.00,
     category: 'Promoção',
-    image: 'regenerated_image_1777503586806.png',
+    image: 'kit-bolofofos.png',
   },
   {
     id: '16',
@@ -27,7 +27,7 @@ export const PRODUCTS: Product[] = [
     description: 'Decoração completa do Stitch em tons de azul e rosa. Aproveite a promoção! (Não trabalhamos com arco de balões)',
     price: 80.00,
     category: 'Promoção',
-    image: 'regenerated_image_1777504639363.png',
+    image: 'kit-stitch.png',
   },
   {
     id: '17',
@@ -35,7 +35,7 @@ export const PRODUCTS: Product[] = [
     description: 'Kit encantado com painel e cilindros personalizados. Valor promocional para reserva rápida! (Não trabalhamos com arco de balões)',
     price: 80.00,
     category: 'Promoção',
-    image: 'regenerated_image_1777504640150.png',
+    image: 'kit-reinomagico.png',
   },
   {
     id: '13',
@@ -43,7 +43,7 @@ export const PRODUCTS: Product[] = [
     description: 'Kit sem o Painel! Somente 3 Cilindros com capas personalizadas em tons de rosa e boleiras combinando.',
     price: 60.00,
     category: 'Cilindros & Boleiras',
-    image: 'regenerated_image_1777504641727.png',
+    image: 'kit-cilindro-floral.png',
   },
   {
     id: '14',
@@ -51,7 +51,7 @@ export const PRODUCTS: Product[] = [
     description: 'Kit sem o Painel! Inclui Capas para os Cilindros com texturas elegantes e Boleiras douradas de destaque.',
     price: 60.00,
     category: 'Cilindros & Boleiras',
-    image: 'regenerated_image_1777504642796.png',
+    image: 'kit-cilindro-luxo.png',
   },
   {
     id: '1',
@@ -59,7 +59,7 @@ export const PRODUCTS: Product[] = [
     description: 'Kit delicado com painel decorativo "Boy or Girl", pelúcia de urso e suportes dourados.',
     price: 40.00,
     category: 'Festa',
-    image: 'regenerated_image_1777504643429.png',
+    image: 'kit-charevelacao.png',
   },
   {
     id: '2',
@@ -67,7 +67,7 @@ export const PRODUCTS: Product[] = [
     description: 'Celebre com as cores do Mengão! Painel sublimado e acessórios pretos de alta qualidade.',
     price: 40.00,
     category: 'Festa',
-    image: 'regenerated_image_1777504643958.png',
+    image: 'kit-flamengo.png',
   },
   {
     id: '3',
@@ -75,15 +75,15 @@ export const PRODUCTS: Product[] = [
     description: 'Para o torcedor fiel! Painel do Timão with suportes brancos e pretos elegantes.',
     price: 40.00,
     category: 'Festa',
-    image: 'regenerated_image_1777504644420.png',
+    image: 'kit-corinthians.png',
   },
   {
     id: '4',
     name: 'Kit Estádio de Futebol',
-    description: 'Painel vibrante de estádio com suportes temáticos para os amantes do esporte.',
+    description: 'Painel vibrante de estádio with suportes temáticos para os amantes do esporte.',
     price: 40.00,
     category: 'Festa',
-    image: 'regenerated_image_1777504644881.png',
+    image: 'kit-futebol.png',
   },
   {
     id: '5',
@@ -91,7 +91,7 @@ export const PRODUCTS: Product[] = [
     description: 'Tema "É uma menina" with decoração floral, pelúcia e painel delicado.',
     price: 40.00,
     category: 'Festa',
-    image: 'regenerated_image_1777504645509.png',
+    image: 'kit-ursinha.png',
   },
   {
     id: '6',
@@ -99,7 +99,7 @@ export const PRODUCTS: Product[] = [
     description: 'Painel moderno com mensagem de Gratidão em fundo galáxia e arranjos azuis.',
     price: 40.00,
     category: 'Festa',
-    image: 'regenerated_image_1777504646022.png',
+    image: 'kit-gratidao.png',
   },
   {
     id: '7',
@@ -107,7 +107,7 @@ export const PRODUCTS: Product[] = [
     description: 'Celebração sofisticada com painel Happy Birthday, suportes dourados e bolo fake.',
     price: 40.00,
     category: 'Festa',
-    image: 'regenerated_image_1777504646577.png',
+    image: 'kit-bday-gold.png',
   },
   {
     id: '8',
@@ -115,7 +115,7 @@ export const PRODUCTS: Product[] = [
     description: 'Clima de festa tropical with painel pôr do sol e acessórios em cores vibrantes.',
     price: 40.00,
     category: 'Festa',
-    image: 'regenerated_image_1777504647085.png',
+    image: 'kit-tardezinha.png',
   },
   {
     id: '9',
@@ -123,7 +123,7 @@ export const PRODUCTS: Product[] = [
     description: 'Painel misto rosa e azul com vasos e suportes coordenados.',
     price: 40.00,
     category: 'Festa',
-    image: 'regenerated_image_1777504647949.png',
+    image: 'kit-cha-ursinho.png',
   },
   {
     id: '10',
@@ -131,7 +131,7 @@ export const PRODUCTS: Product[] = [
     description: 'Decoração feminina moderna com painel glitter rosa e suportes combinando.',
     price: 40.00,
     category: 'Festa',
-    image: 'regenerated_image_1777504648404.png',
+    image: 'kit-mais-linda.png',
   },
   {
     id: '11',
@@ -139,7 +139,7 @@ export const PRODUCTS: Product[] = [
     description: 'O clássico favorito das crianças com painel alegre e suportes coloridos.',
     price: 40.00,
     category: 'Festa',
-    image: 'regenerated_image_1777504648959.png',
+    image: 'kit-galinha.png',
   },
   {
     id: '12',
@@ -147,7 +147,7 @@ export const PRODUCTS: Product[] = [
     description: 'Kit Feliz Natal completo para deixar sua ceia ainda mais especial e decorada.',
     price: 40.00,
     category: 'Festa',
-    image: 'regenerated_image_1777504649480.png',
+    image: 'kit-natal.png',
   },
 ];
 
