@@ -26,10 +26,10 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
       return imagePath;
     }
     
-    const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+    // Ensure the path starts with exactly one slash for root-relative serving
+    // This is the most reliable way for Vite + Vercel
     const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-    
-    return `${baseUrl}${cleanPath}`;
+    return cleanPath;
   };
 
   return (
@@ -40,15 +40,23 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
       className="group bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-gray-100 hover:border-pink-200 transition-all duration-500 hover:shadow-2xl hover:shadow-pink-50/50 flex flex-col h-full"
       id={`product-${product.id}`}
     >
-      <div className="relative aspect-square overflow-hidden bg-gray-50 flex items-center justify-center">
+      <div className="relative aspect-square overflow-hidden bg-white flex items-center justify-center p-4 md:p-6">
         <img
           src={getImageUrl(product.image)}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          className="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-110"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            if (target.src.includes('regenerated_image')) {
-              console.error(`Failed to load product image: ${product.image} at ${target.src}`);
+            const currentSrc = target.src;
+            
+            // If the absolute path failed, try relative path as a fallback
+            if (currentSrc.startsWith(window.location.origin) && !currentSrc.includes('fallback=true')) {
+              console.warn(`Local image failed: ${product.image}. Trying fallback...`);
+              // Try without the base URL if it was there, or just the filename
+              const filename = product.image.split('/').pop();
+              target.src = `${window.location.origin}/${filename}?fallback=true`;
+            } else {
+              console.error(`Failed to load product image: ${product.image}`);
             }
           }}
         />
