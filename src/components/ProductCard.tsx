@@ -11,33 +11,26 @@ import { Product } from '../types';
 interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product, quantity: number) => void;
+  onImageClick?: (image: string, name: string) => void;
   key?: string | number;
 }
 
-export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
+export default function ProductCard({ product, onAddToCart, onImageClick }: ProductCardProps) {
   const [quantity, setQuantity] = useState(1);
 
   const adjustQuantity = (amount: number) => {
     setQuantity(prev => Math.max(1, prev + amount));
   };
 
-  /**
-   * Ajuste de Imagem:
-   * Garante que nomes de arquivos simples como "kit-stitch.png" 
-   * sejam lidos como "/kit-stitch.png" para buscar na pasta public.
-   */
   const getImageUrl = (imagePath: string) => {
     if (!imagePath) return '';
-    
-    // Se já for uma URL completa (http) ou base64, não mexe
     if (imagePath.startsWith('http') || imagePath.startsWith('data:')) {
       return imagePath;
     }
-
-    // Garante que o caminho comece com / para buscar na pasta public do Vite
-    // Remove barras extras no início e adiciona apenas uma
-    const cleanPath = imagePath.replace(/^\/+/, '');
-    return `/${cleanPath}`;
+    
+    // Most standard way: if it starts with /, use as is. If not, add /.
+    // This assumes assets are in 'public' and served at root.
+    return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
   };
 
   return (
@@ -48,28 +41,39 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
       className="group bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-gray-100 hover:border-pink-200 transition-all duration-500 hover:shadow-2xl hover:shadow-pink-50/50 flex flex-col h-full"
       id={`product-${product.id}`}
     >
-      {/* Área da Imagem */}
-      <div className="relative aspect-square overflow-hidden bg-gray-50">
+      <div 
+        className="relative aspect-square overflow-hidden bg-gray-50 flex items-center justify-center cursor-pointer group/img"
+        onClick={() => onImageClick?.(product.image, product.name)}
+      >
         <img
           src={getImageUrl(product.image)}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-110"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            // Evita loop infinito se o placeholder também falhar
-            if (!target.src.includes('placehold.co')) {
-              target.src = 'https://placehold.co/600x600?text=Imagem+Nao+Encontrada';
+            if (target.src.includes('regenerated_image')) {
+              console.error(`Failed to load product image: ${product.image} at ${target.src}`);
             }
           }}
         />
-        <div className="absolute top-3 left-3 md:top-4 md:left-4">
+        <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/10 transition-colors flex items-center justify-center">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileHover={{ opacity: 1, scale: 1 }}
+              className="bg-white/80 backdrop-blur-md p-3 rounded-full text-pink-500 shadow-xl opacity-0 group-hover/img:opacity-100 transition-all"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-black uppercase tracking-widest px-2">Ver Foto</span>
+              </div>
+            </motion.div>
+        </div>
+        <div className="absolute top-3 left-3 md:top-4 md:left-4 z-10">
           <span className="bg-white/90 backdrop-blur-md text-pink-500 border border-pink-100 px-3 py-1 rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-widest shadow-sm">
             {product.category}
           </span>
         </div>
       </div>
 
-      {/* Conteúdo do Card */}
       <div className="p-5 md:p-8 flex flex-col flex-1">
         <div className="flex justify-between items-start mb-2 gap-2 md:gap-4">
           <h3 className="text-sm md:text-lg font-bold text-gray-900 leading-tight">
@@ -83,7 +87,6 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           {product.description}
         </p>
 
-        {/* Controles de Quantidade e Botão */}
         <div className="mt-auto space-y-3 md:space-y-4">
           <div className="flex items-center justify-between bg-gray-50 rounded-xl p-1.5 md:p-2">
             <span className="text-[8px] md:text-xs font-bold text-gray-400 uppercase ml-2">Quantidade</span>

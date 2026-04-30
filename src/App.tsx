@@ -11,6 +11,7 @@ import Cart from './components/Cart';
 import Testimonials from './components/Testimonials';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import ReviewForm from './components/ReviewForm';
+import ImageModal from './components/ImageModal';
 import { PRODUCTS, REVIEWS, CATEGORIES } from './data/mockData';
 import { Product, CartItem, Review } from './types';
 import { ArrowRight, Sparkles, Instagram, Mail } from 'lucide-react';
@@ -23,6 +24,7 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
   const [reviews, setReviews] = useState<Review[]>(REVIEWS);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState<{ src: string; alt: string } | null>(null);
 
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((product) => {
@@ -185,6 +187,7 @@ export default function App() {
                   key={product.id}
                   product={product}
                   onAddToCart={handleAddToCart}
+                  onImageClick={(src, alt) => setPreviewImage({ src, alt })}
                 />
               ))}
             </AnimatePresence>
@@ -286,6 +289,13 @@ export default function App() {
         isOpen={isReviewModalOpen}
         onClose={() => setIsReviewModalOpen(false)}
         onSubmit={handleAddReview}
+      />
+
+      <ImageModal
+        isOpen={!!previewImage}
+        onClose={() => setPreviewImage(null)}
+        imageSrc={previewImage ? (previewImage.src.startsWith('http') || previewImage.src.startsWith('data:') ? previewImage.src : (previewImage.src.startsWith('/') ? previewImage.src : `/${previewImage.src}`)) : ''}
+        imageAlt={previewImage?.alt || ''}
       />
     </div>
   );
