@@ -4,7 +4,7 @@
  */
 
 import { useState } from 'react';
-import { ShoppingCart, Search, Menu, Phone, Instagram, X, Mail } from 'lucide-react';
+import { ShoppingCart, Search, Menu, Instagram, X, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CONTACT_EMAIL } from '../constants';
 

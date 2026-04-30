@@ -14,7 +14,8 @@ import ReviewForm from './components/ReviewForm';
 import ImageModal from './components/ImageModal';
 import { PRODUCTS, REVIEWS, CATEGORIES } from './data/mockData';
 import { Product, CartItem, Review } from './types';
-import { ArrowRight, Sparkles, Instagram, Mail } from 'lucide-react';
+import { getImageUrl } from './utils/image';
+import { ArrowRight, Sparkles, Instagram, Mail, MapPin } from 'lucide-react';
 import { CONTACT_EMAIL } from './constants';
 
 export default function App() {
@@ -91,12 +92,16 @@ export default function App() {
                 <Sparkles size={12} />
                 Celebre com estilo
               </div>
-              <h1 className="text-3xl sm:text-6xl md:text-8xl font-display font-extrabold tracking-tight leading-[1.1] mb-4 lg:mb-10 uppercase text-gray-900 px-4 sm:px-0">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-display font-extrabold tracking-tight leading-[1.1] mb-2 lg:mb-6 uppercase text-gray-900 px-4 sm:px-0">
                 A Festa <br className="hidden sm:block" />
                 Dos Seus <br className="hidden sm:block" />
                 <span className="text-pink-500">Sonhos</span>
               </h1>
-              <p className="text-sm md:text-xl text-gray-500 mb-6 lg:mb-12 max-w-sm sm:max-w-md mx-auto lg:mx-0 leading-relaxed font-light px-8 sm:px-0">
+              <div className="flex items-center justify-center lg:justify-start gap-2 mb-6 lg:mb-10 text-gray-400">
+                <MapPin size={14} className="text-pink-400" />
+                <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">Araguaína - TO</span>
+              </div>
+              <p className="text-sm md:text-lg text-gray-500 mb-6 lg:mb-12 max-w-sm sm:max-w-md mx-auto lg:mx-0 leading-relaxed font-light px-8 sm:px-0">
                 Kits decorativos <span className="text-black font-semibold">Pegue & Monte</span>. A solução prática, econômica e elegante para transformar qualquer ambiente.
               </p>
               
@@ -243,7 +248,11 @@ export default function App() {
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <span className="text-3xl md:text-4xl font-display font-black text-gray-900 tracking-tighter uppercase leading-none">BOA FESTA</span>
             <span className="text-[10px] md:text-xs font-bold tracking-[0.4em] text-pink-500 uppercase mt-2">Pegue & Monte</span>
-            <p className="mt-8 text-sm md:text-base text-gray-400 max-w-xs leading-relaxed font-light">Soluções criativas e elegantes para tornar sua festa inesquecível. Praticidade que encanta.</p>
+            <div className="mt-6 flex items-center gap-2 text-gray-400">
+              <MapPin size={14} className="text-pink-400" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Araguaína - TO</span>
+            </div>
+            <p className="mt-4 text-sm md:text-base text-gray-400 max-w-xs leading-relaxed font-light">Soluções criativas e elegantes para tornar sua festa inesquecível. Praticidade que encanta.</p>
           </div>
 
           <div className="flex flex-col items-center justify-center">
@@ -294,7 +303,7 @@ export default function App() {
       <ImageModal
         isOpen={!!previewImage}
         onClose={() => setPreviewImage(null)}
-        imageSrc={previewImage ? (previewImage.src.startsWith('http') || previewImage.src.startsWith('data:') ? previewImage.src : (previewImage.src.startsWith('/') ? previewImage.src : `/${previewImage.src}`)) : ''}
+        imageSrc={getImageUrl(previewImage?.src)}
         imageAlt={previewImage?.alt || ''}
       />
     </div>

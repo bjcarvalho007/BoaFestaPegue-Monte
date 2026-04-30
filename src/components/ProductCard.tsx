@@ -7,6 +7,7 @@ import { Plus, Minus, ShoppingCart } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { Product } from '../types';
+import { getImageUrl } from '../utils/image';
 
 interface ProductCardProps {
   product: Product;
@@ -20,17 +21,6 @@ export default function ProductCard({ product, onAddToCart, onImageClick }: Prod
 
   const adjustQuantity = (amount: number) => {
     setQuantity(prev => Math.max(1, prev + amount));
-  };
-
-  const getImageUrl = (imagePath: string) => {
-    if (!imagePath) return '';
-    if (imagePath.startsWith('http') || imagePath.startsWith('data:')) {
-      return imagePath;
-    }
-    
-    // Most standard way: if it starts with /, use as is. If not, add /.
-    // This assumes assets are in 'public' and served at root.
-    return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
   };
 
   return (

@@ -7,6 +7,7 @@ import { X, Trash2, ShoppingBag, Plus, Minus } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CartItem } from '../types';
 import { WHATSAPP_NUMBER } from '../constants';
+import { getImageUrl } from '../utils/image';
 
 interface CartProps {
   isOpen: boolean;
@@ -89,7 +90,7 @@ export default function Cart({ isOpen, onClose, items, onRemove, onUpdateQuantit
                   <div key={item.id} className="flex min-h-[100px] gap-4 group border-b border-gray-50 pb-6 last:border-0 last:pb-0">
                     <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gray-50 rounded-2xl overflow-hidden flex-shrink-0 border border-gray-100">
                       <img
-                        src={item.image}
+                        src={getImageUrl(item.image)}
                         alt={item.name}
                         className="w-full h-full object-cover"
                         referrerPolicy="no-referrer"

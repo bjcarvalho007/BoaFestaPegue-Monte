@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { X, ZoomIn } from 'lucide-react';
+import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface ImageModalProps {
@@ -40,11 +40,11 @@ export default function ImageModal({ isOpen, onClose, imageSrc, imageAlt }: Imag
               <X size={24} className="md:w-8 md:h-8" strokeWidth={3} />
             </button>
             
-            <div className="relative overflow-hidden bg-gray-50 flex items-center justify-center min-w-[300px] min-h-[300px]">
+            <div className="relative overflow-hidden bg-gray-50 flex items-center justify-center min-w-[320px] md:min-w-[600px] min-h-[320px]">
               <img
                 src={imageSrc}
                 alt={imageAlt}
-                className="max-w-full max-h-[75vh] object-contain block select-none"
+                className="max-w-full max-h-[82vh] object-contain block select-none px-4 md:px-0"
               />
             </div>
             
