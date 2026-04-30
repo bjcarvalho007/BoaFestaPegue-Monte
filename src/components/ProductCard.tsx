@@ -21,14 +21,23 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
     setQuantity(prev => Math.max(1, prev + amount));
   };
 
-  // AJUSTE: Lógica simplificada para garantir que o caminho aponte para a raiz ou URL externa
+  /**
+   * Ajuste de Imagem:
+   * Garante que nomes de arquivos simples como "kit-stitch.png" 
+   * sejam lidos como "/kit-stitch.png" para buscar na pasta public.
+   */
   const getImageUrl = (imagePath: string) => {
     if (!imagePath) return '';
+    
+    // Se já for uma URL completa (http) ou base64, não mexe
     if (imagePath.startsWith('http') || imagePath.startsWith('data:')) {
       return imagePath;
     }
-    // Remove barras duplas se houver e garante que comece com / para buscar na pasta public
-    return `/${imagePath.replace(/^\/+/, '')}`;
+
+    // Garante que o caminho comece com / para buscar na pasta public do Vite
+    // Remove barras extras no início e adiciona apenas uma
+    const cleanPath = imagePath.replace(/^\/+/, '');
+    return `/${cleanPath}`;
   };
 
   return (
@@ -39,6 +48,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
       className="group bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-gray-100 hover:border-pink-200 transition-all duration-500 hover:shadow-2xl hover:shadow-pink-50/50 flex flex-col h-full"
       id={`product-${product.id}`}
     >
+      {/* Área da Imagem */}
       <div className="relative aspect-square overflow-hidden bg-gray-50">
         <img
           src={getImageUrl(product.image)}
@@ -46,9 +56,9 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            // AJUSTE: Fallback mais robusto caso a imagem falhe
-            if (!target.src.includes('placeholder')) {
-              target.src = 'https://placehold.co/600x600?text=Imagem+Indisponivel';
+            // Evita loop infinito se o placeholder também falhar
+            if (!target.src.includes('placehold.co')) {
+              target.src = 'https://placehold.co/600x600?text=Imagem+Nao+Encontrada';
             }
           }}
         />
@@ -59,6 +69,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
         </div>
       </div>
 
+      {/* Conteúdo do Card */}
       <div className="p-5 md:p-8 flex flex-col flex-1">
         <div className="flex justify-between items-start mb-2 gap-2 md:gap-4">
           <h3 className="text-sm md:text-lg font-bold text-gray-900 leading-tight">
@@ -72,6 +83,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           {product.description}
         </p>
 
+        {/* Controles de Quantidade e Botão */}
         <div className="mt-auto space-y-3 md:space-y-4">
           <div className="flex items-center justify-between bg-gray-50 rounded-xl p-1.5 md:p-2">
             <span className="text-[8px] md:text-xs font-bold text-gray-400 uppercase ml-2">Quantidade</span>
