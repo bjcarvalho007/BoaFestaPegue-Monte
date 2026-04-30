@@ -21,14 +21,14 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
     setQuantity(prev => Math.max(1, prev + amount));
   };
 
+  // AJUSTE: Lógica simplificada para garantir que o caminho aponte para a raiz ou URL externa
   const getImageUrl = (imagePath: string) => {
+    if (!imagePath) return '';
     if (imagePath.startsWith('http') || imagePath.startsWith('data:')) {
       return imagePath;
     }
-    
-    // Ensure the path is root-relative for standard Vite/Vercel serving from public
-    const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-    return cleanPath;
+    // Remove barras duplas se houver e garante que comece com / para buscar na pasta public
+    return `/${imagePath.replace(/^\/+/, '')}`;
   };
 
   return (
@@ -46,12 +46,9 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            const currentSrc = target.src;
-            
-            // Try fallback to just the filename if root-relative fails
-            if (!currentSrc.includes('fallback=true')) {
-              const filename = product.image.split('/').pop();
-              target.src = `./${filename}?fallback=true`;
+            // AJUSTE: Fallback mais robusto caso a imagem falhe
+            if (!target.src.includes('placeholder')) {
+              target.src = 'https://placehold.co/600x600?text=Imagem+Indisponivel';
             }
           }}
         />
